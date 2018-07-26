@@ -6,6 +6,8 @@ import { FETCH_POSTS,
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case DELETE_POST:
+      return _.omit(state, action.payload);
     case FETCH_POST:
       return { ...state, [action.payload.data.id]: action.payload.data };
     case FETCH_POSTS:
