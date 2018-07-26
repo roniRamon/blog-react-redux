@@ -1,24 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPost } from '../actions';
 
 class PostsShow extends React.Component {
+
   componentDidMount() {
-    const { id } = this.props.match.params.id;
-    this.props.fetchPost(id);
+    this.props.fetchPost(this.props.match.params.id);
   }
 
   render() {
+    const { post } = this.props;
+
+    if (!post){
+      return <div>Loading...</div>;
+    }
     return (
       <div>
-        Post Show!
+      <Link to="/">Back To Post</Link>
+        <h3>{ post.title }</h3>
+        <h6>Categories: { post.categories }</h6>
+        <p>{ post.content }</p>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({posts}, ownProps) => ({
-  post: posts[ownProps.match.props.id],
+const mapStateToProps = (state, ownProps) => ({
+  post: state.posts[ownProps.match.params.id],
 });
 
-export default connect(mapStateToProps, {fetchPost})(PostsShow);
+
+export default connect(mapStateToProps, {fetchPost} )(PostsShow);
