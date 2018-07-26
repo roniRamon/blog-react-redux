@@ -1,5 +1,8 @@
 import _ from 'lodash';
-import { FETCH_POSTS, CREATE_POST, FETCH_POST } from '../actions/index';
+import { FETCH_POSTS,
+         CREATE_POST,
+         FETCH_POST,
+         DELETE_POST } from '../actions/index';
 
 export default (state = {}, action) => {
   switch (action.type) {
